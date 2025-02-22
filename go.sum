@@ -1,0 +1,6 @@
+github.com/gorilla/mux v1.8.1 h1:TuBL49tXwgrFYWhqrNgrUNEY92u81SPhu7sTdzQEiWY=
+github.com/gorilla/mux v1.8.1/go.mod h1:AKf9I4AEqPTmMytcMc0KkNouC66V3BtZ4qD5fmWSiMQ=
+github.com/ledxdeliveryflopp/rich-go v0.0.0-20250222161641-0236e13613a6 h1:+cF1+NHxIazbG8TBAhOjOSVeTIeE1MZcgbv5beAk3ac=
+github.com/ledxdeliveryflopp/rich-go v0.0.0-20250222161641-0236e13613a6/go.mod h1:YsQ2c3LUOB2c2BAEs+WjlX2vAuKFFig4kfX2fP8VmRc=
+gopkg.in/natefinch/npipe.v2 v2.0.0-20160621034901-c1b8fa8bdcce h1:+JknDZhAj8YMt7GC73Ei8pv4MzjDUNPHgQWJdtMAaDU=
+gopkg.in/natefinch/npipe.v2 v2.0.0-20160621034901-c1b8fa8bdcce/go.mod h1:5AcXVHNjg+BDxry382+8OKon8SEWiKktQR07RKPsv1c=
