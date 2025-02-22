@@ -2,6 +2,7 @@ package discord
 
 import (
 	"github.com/hugolgst/rich-go/client"
+	"log"
 )
 
 func InitDiscordClient() error {
@@ -9,5 +10,6 @@ func InitDiscordClient() error {
 	if err != nil {
 		return err
 	}
+	log.Println("discord inited")
 	return nil
 }

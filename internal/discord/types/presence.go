@@ -12,9 +12,14 @@ type Presence struct {
 	Details          string // Персонаж
 	HeroCode         string // Код персонажа
 	HeroReadableName string // Имя персонажа
+	SmallImage       string
 }
 
 func (p *Presence) SetPresenceInfo(player *types.Player, hero *types.Hero) {
+	if hero.Level == 0 {
+		p.State = "В меню"
+		return
+	}
 	p.HeroCode = hero.Name
 	p.HeroReadableName = discord.Heroes[hero.Name]
 	p.State = fmt.Sprintf("KDA: %d/%d/%d,  lvl: %d, gold: %d",
@@ -25,4 +30,5 @@ func (p *Presence) SetPresenceInfo(player *types.Player, hero *types.Hero) {
 	} else {
 		p.Details = fmt.Sprintf("Персонаж: %s - %d%%HP", p.HeroReadableName, hero.HealthPercent)
 	}
+	p.SmallImage = "main"
 }
