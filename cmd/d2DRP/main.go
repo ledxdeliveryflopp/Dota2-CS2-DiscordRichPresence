@@ -9,14 +9,14 @@ import (
 )
 
 func main() {
-	mainRouter := mux.NewRouter()
-	router.SetIntegrationRouter(mainRouter)
 	err := discordInit.InitDiscordClient()
 	if err != nil {
 		panic(err)
 	}
-	err = http.ListenAndServe(":52424", mainRouter)
+	mainRouter := mux.NewRouter()
+	router.SetIntegrationRouter(mainRouter)
 	log.Println("application started")
+	err = http.ListenAndServe(":52424", mainRouter)
 	if err != nil {
 		panic(err)
 	}
