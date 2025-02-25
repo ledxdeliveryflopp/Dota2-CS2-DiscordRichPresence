@@ -2,6 +2,7 @@ package main
 
 import (
 	"discord_dota2_cs2/internal/api/router"
+	"discord_dota2_cs2/internal/configs"
 	discordInit "discord_dota2_cs2/internal/discord/init"
 	"fmt"
 	"github.com/gorilla/mux"
@@ -13,8 +14,7 @@ import (
 func initLogrus() {
 	file, err := os.OpenFile("logrus.log", os.O_CREATE|os.O_WRONLY, 0666)
 	if err != nil {
-		log.Info("error while create log file, using base std")
-		log.Error("error from initLogrus:", err)
+		log.Panicln(err)
 		return
 	}
 	log.SetOutput(file)
@@ -23,6 +23,7 @@ func initLogrus() {
 
 func main() {
 	initLogrus()
+	configs.InitSteamSettings()
 	discordInit.InitDiscordClient()
 	go discordInit.CheckGameIsRunning()
 	mainRouter := mux.NewRouter()
