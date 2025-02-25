@@ -3,6 +3,7 @@ package types
 import (
 	csgoTypes "discord_dota2_cs2/internal/api/csgo_types"
 	dotaTypes "discord_dota2_cs2/internal/api/dota_types"
+	"discord_dota2_cs2/internal/configs"
 	"discord_dota2_cs2/internal/discord"
 	"fmt"
 )
@@ -42,11 +43,15 @@ func (c *CsGoPresence) SetCsgoPresenceInfo(response *csgoTypes.GameCsgoResponse)
 	case gameMode == "menu":
 		c.State = "В меню"
 	case gameMode == "playing":
+		if response.CsGoPlayer.SteamID != configs.Settings.SteamID {
+			c.State = fmt.Sprintf("Наблюдает за %s", response.CsGoPlayer.Name)
+			return
+		}
 		c.State = fmt.Sprintf("Team - %s | HP/Armor - %d/%d | KDA- %d/%d/%d | mvps - %d",
 			response.CsGoPlayer.Team, response.CsGoPlayer.State.Health, response.CsGoPlayer.State.Armor,
 			response.CsGoPlayer.Stats.Kills, response.CsGoPlayer.Stats.Deaths, response.CsGoPlayer.Stats.Assists,
 			response.CsGoPlayer.Stats.Mvps)
-		c.Details = fmt.Sprintf("Map - %s | round - %d | KT/T score - %d/%d", response.GameMap.Name,
+		c.Details = fmt.Sprintf("Map - %s | round - %d | CT/T score - %d/%d", response.GameMap.Name,
 			response.GameMap.Round, response.GameMap.TeamCt.Score, response.GameMap.TeamT.Score)
 	}
 }

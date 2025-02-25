@@ -16,7 +16,6 @@ func HandleDotaGameStateResponse(writer http.ResponseWriter, request *http.Reque
 		log.Error("error while encoding json: ", err)
 	}
 	log.Infof("Dota response: %+v", dotaResponse)
-	log.Infof("Dota response: %+v", dotaResponse)
 	defer request.Body.Close()
 	errorChan := make(chan error)
 	successChan := make(chan bool)
