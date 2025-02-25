@@ -1,15 +1,16 @@
 package handler
 
 import (
-	apiTypes "discord_dota2/internal/api/types"
-	"discord_dota2/internal/discord"
-	"discord_dota2/internal/discord/types"
+	csgoTypes "discord_dota2_cs2/internal/api/csgo_types"
+	dotaTypes "discord_dota2_cs2/internal/api/dota_types"
+	"discord_dota2_cs2/internal/discord"
+	"discord_dota2_cs2/internal/discord/types"
 	"github.com/hugolgst/rich-go/client"
 )
 
-func SetDiscordPresence(success chan bool, error chan error, player *apiTypes.Player, hero *apiTypes.Hero) {
-	var presence types.Presence
-	presence.SetPresenceInfo(player, hero)
+func SetDotaPresence(success chan bool, error chan error, response *dotaTypes.GameDotaResponse) {
+	var presence types.DotaPresence
+	presence.SetDotaPresenceInfo(response)
 	err := client.SetActivity("1342725398261403668", client.Activity{
 		State:      presence.State,
 		Details:    presence.Details,
@@ -22,6 +23,27 @@ func SetDiscordPresence(success chan bool, error chan error, player *apiTypes.Pl
 		//	Players:    15,
 		//	MaxPlayers: 24,
 		//},
+		Timestamps: &client.Timestamps{
+			Start: &discord.GameTime,
+		},
+	})
+	if err != nil {
+		error <- err
+		return
+	}
+	success <- true
+}
+
+func SetCsGoPresence(success chan bool, error chan error, response *csgoTypes.GameCsgoResponse) {
+	var presence types.CsGoPresence
+	presence.SetCsgoPresenceInfo(response)
+	err := client.SetActivity("1343901867016585216", client.Activity{
+		State:      presence.State,
+		Details:    presence.Details,
+		LargeImage: "map image",
+		LargeText:  "map name",
+		SmallImage: "team image",
+		SmallText:  "team name",
 		Timestamps: &client.Timestamps{
 			Start: &discord.GameTime,
 		},
