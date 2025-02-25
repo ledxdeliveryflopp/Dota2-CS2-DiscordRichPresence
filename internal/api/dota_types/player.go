@@ -1,6 +1,6 @@
-package types
+package dota_types
 
-type Player struct {
+type DotaPlayer struct {
 	Name       string `json:"name"`
 	Gold       int    `json:"gold"`
 	Kills      int    `json:"kills"`

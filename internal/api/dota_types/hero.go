@@ -1,6 +1,6 @@
-package types
+package dota_types
 
-type Hero struct {
+type DotaHero struct {
 	Name            string `json:"name"`
 	Level           int    `json:"level,omitempty"`
 	Alive           bool   `json:"alive"`
