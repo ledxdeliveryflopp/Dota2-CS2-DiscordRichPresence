@@ -2,7 +2,9 @@ package discord
 
 import "time"
 
-var Heroes = map[string]string{
+var GamePid int32
+
+var DotaHeroes = map[string]string{
 	"npc_dota_hero_abaddon":             "Abaddon",
 	"npc_dota_hero_alchemist":           "Alchemist",
 	"npc_dota_hero_antimage":            "Anti-Mage",
@@ -172,3 +174,10 @@ var Heroes = map[string]string{
 }
 
 var GameTime = time.Now()
+
+var DotaGameState = map[string]string{
+	"DOTA_GAMERULES_STATE_GAME_IN_PROGRESS": "В игре",
+	"DOTA_GAMERULES_STATE_POST_GAME":        "Просматривает результаты игры",
+	"DOTA_GAMERULES_STATE_HERO_SELECTION":   "Выбирает героя",
+	"DOTA_GAMERULES_STATE_STRATEGY_TIME":    "Продумывает стратегию",
+}
