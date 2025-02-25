@@ -180,4 +180,6 @@ var DotaGameState = map[string]string{
 	"DOTA_GAMERULES_STATE_POST_GAME":        "Просматривает результаты игры",
 	"DOTA_GAMERULES_STATE_HERO_SELECTION":   "Выбирает героя",
 	"DOTA_GAMERULES_STATE_STRATEGY_TIME":    "Продумывает стратегию",
+	"DOTA_GAMERULES_STATE_TEAM_SHOWCASE":    "Просмотр команд",
+	"DOTA_GAMERULES_STATE_PRE_GAME":         "Начало игры?",
 }
