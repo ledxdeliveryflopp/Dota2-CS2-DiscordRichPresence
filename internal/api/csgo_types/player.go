@@ -14,7 +14,7 @@ type MatchStats struct {
 }
 
 type CsGoPlayer struct {
-	SteamID  string      `json:"steam_id"`
+	SteamID  string      `json:"steamid"`
 	Name     string      `json:"name"`     // Nickname в Steam
 	Team     string      `json:"team"`     // Команда за которую играет
 	Activity string      `json:"activity"` // Что делает(в меню, в игре и тд)

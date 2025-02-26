@@ -2,7 +2,6 @@ package main
 
 import (
 	"discord_dota2_cs2/internal/api/router"
-	"discord_dota2_cs2/internal/configs"
 	discordInit "discord_dota2_cs2/internal/discord/init"
 	"fmt"
 	"github.com/gorilla/mux"
@@ -23,7 +22,6 @@ func initLogrus() {
 
 func main() {
 	initLogrus()
-	configs.InitSteamSettings()
 	discordInit.InitDiscordClient()
 	go discordInit.CheckGameIsRunning()
 	mainRouter := mux.NewRouter()

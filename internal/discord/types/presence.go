@@ -3,7 +3,7 @@ package types
 import (
 	csgoTypes "discord_dota2_cs2/internal/api/csgo_types"
 	dotaTypes "discord_dota2_cs2/internal/api/dota_types"
-	"discord_dota2_cs2/internal/configs"
+	config "discord_dota2_cs2/internal/configs"
 	"discord_dota2_cs2/internal/discord"
 	"fmt"
 )
@@ -37,13 +37,13 @@ type CsGoPresence struct {
 	Details string // Map - Mirage, round - 2, KT/T score ratio - 2/1
 }
 
-func (c *CsGoPresence) SetCsgoPresenceInfo(response *csgoTypes.GameCsgoResponse) {
+func (c *CsGoPresence) SetCsgoPresenceInfo(response *csgoTypes.GameCsgoResponse, settings *config.SteamSettings) {
 	gameMode := response.CsGoPlayer.Activity
 	switch {
 	case gameMode == "menu":
 		c.State = "В меню"
 	case gameMode == "playing":
-		if response.CsGoPlayer.SteamID != configs.Settings.SteamID {
+		if response.CsGoPlayer.SteamID != settings.SteamID {
 			c.State = fmt.Sprintf("Наблюдает за %s", response.CsGoPlayer.Name)
 			return
 		}

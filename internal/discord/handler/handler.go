@@ -3,6 +3,7 @@ package handler
 import (
 	csgoTypes "discord_dota2_cs2/internal/api/csgo_types"
 	dotaTypes "discord_dota2_cs2/internal/api/dota_types"
+	config "discord_dota2_cs2/internal/configs"
 	"discord_dota2_cs2/internal/discord"
 	"discord_dota2_cs2/internal/discord/types"
 	"github.com/hugolgst/rich-go/client"
@@ -36,7 +37,9 @@ func SetDotaPresence(success chan bool, error chan error, response *dotaTypes.Ga
 
 func SetCsGoPresence(success chan bool, error chan error, response *csgoTypes.GameCsgoResponse) {
 	var presence types.CsGoPresence
-	presence.SetCsgoPresenceInfo(response)
+	var settings config.SteamSettings
+	settings.InitSettings()
+	presence.SetCsgoPresenceInfo(response, &settings)
 	err := client.SetActivity("1343901867016585216", client.Activity{
 		State:      presence.State,
 		Details:    presence.Details,
