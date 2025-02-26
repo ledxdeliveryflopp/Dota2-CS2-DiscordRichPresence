@@ -43,8 +43,8 @@ func SetCsGoPresence(success chan bool, error chan error, response *csgoTypes.Ga
 	err := client.SetActivity("1343901867016585216", client.Activity{
 		State:      presence.State,
 		Details:    presence.Details,
-		LargeImage: "map image",
-		LargeText:  "map name",
+		LargeImage: "main",
+		LargeText:  "CS:GO 2",
 		SmallImage: "team image",
 		SmallText:  "team name",
 		Timestamps: &client.Timestamps{

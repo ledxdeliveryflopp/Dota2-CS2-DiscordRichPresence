@@ -42,9 +42,11 @@ func (c *CsGoPresence) SetCsgoPresenceInfo(response *csgoTypes.GameCsgoResponse,
 	switch {
 	case gameMode == "menu":
 		c.State = "В меню"
+		fmt.Println("set menu state")
 	case gameMode == "playing":
 		if response.CsGoPlayer.SteamID != settings.SteamID {
 			c.State = fmt.Sprintf("Наблюдает за %s", response.CsGoPlayer.Name)
+			fmt.Println("set spectator state")
 			return
 		}
 		c.State = fmt.Sprintf("Team - %s | HP/Armor - %d/%d | KDA- %d/%d/%d | mvps - %d",
@@ -53,5 +55,6 @@ func (c *CsGoPresence) SetCsgoPresenceInfo(response *csgoTypes.GameCsgoResponse,
 			response.CsGoPlayer.Stats.Mvps)
 		c.Details = fmt.Sprintf("Map - %s | round - %d | CT/T score - %d/%d", response.GameMap.Name,
 			response.GameMap.Round, response.GameMap.TeamCt.Score, response.GameMap.TeamT.Score)
+		fmt.Println("set playing state")
 	}
 }
