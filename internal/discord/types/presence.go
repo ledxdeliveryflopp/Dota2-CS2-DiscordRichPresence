@@ -11,18 +11,19 @@ import (
 type DotaPresence struct {
 	State            string // KDA мб голда
 	Details          string // Персонаж
-	HeroCode         string // Код персонажа
 	HeroReadableName string // Имя персонажа
+	MainImage        string
 	SmallImage       string
 }
 
 func (d *DotaPresence) SetDotaPresenceInfo(response *dotaTypes.GameDotaResponse) {
+	d.MainImage = "main"
 	switch {
 	case *response == (dotaTypes.GameDotaResponse{}):
 		d.State = "В меню"
 	case response.State.GameState == "DOTA_GAMERULES_STATE_GAME_IN_PROGRESS":
-		d.HeroCode = response.DotaHero.Name
-		d.HeroReadableName = discord.DotaHeroes[response.DotaHero.Name]
+		d.HeroReadableName = discord.DotaHeroes[response.DotaHero.Name]["name"]
+		d.MainImage = fmt.Sprintf("https://courier.spectral.gg/images/dota/portraits/%s", discord.DotaHeroes[response.DotaHero.Name]["img"])
 		d.State = fmt.Sprintf("KDA: %d/%d/%d,  lvl: %d, gold: %d",
 			response.DotaPlayer.Kills, response.DotaPlayer.Deaths, response.DotaPlayer.Assists, response.DotaHero.Level, response.DotaPlayer.Gold)
 		d.Details = fmt.Sprintf("Персонаж: %s - %d%%HP", d.HeroReadableName, response.DotaHero.HealthPercent)
@@ -42,11 +43,9 @@ func (c *CsGoPresence) SetCsgoPresenceInfo(response *csgoTypes.GameCsgoResponse,
 	switch {
 	case gameMode == "menu":
 		c.State = "В меню"
-		fmt.Println("set menu state")
 	case gameMode == "playing":
 		if response.CsGoPlayer.SteamID != settings.SteamID {
 			c.State = fmt.Sprintf("Наблюдает за %s", response.CsGoPlayer.Name)
-			fmt.Println("set spectator state")
 			return
 		}
 		c.State = fmt.Sprintf("Team - %s | HP/Armor - %d/%d | KDA- %d/%d/%d | mvps - %d",
@@ -55,6 +54,5 @@ func (c *CsGoPresence) SetCsgoPresenceInfo(response *csgoTypes.GameCsgoResponse,
 			response.CsGoPlayer.Stats.Mvps)
 		c.Details = fmt.Sprintf("Map - %s | round - %d | CT/T score - %d/%d", response.GameMap.Name,
 			response.GameMap.Round, response.GameMap.TeamCt.Score, response.GameMap.TeamT.Score)
-		fmt.Println("set playing state")
 	}
 }
