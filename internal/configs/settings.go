@@ -8,7 +8,7 @@ import (
 )
 
 type SteamSettings struct {
-	SteamID string `json:"steamid"`
+	SteamID string `json:"steam_id"`
 }
 
 func (s *SteamSettings) InitSettings() {
@@ -16,9 +16,9 @@ func (s *SteamSettings) InitSettings() {
 	if err != nil {
 		log.Panicln(err)
 	}
-	var settings SteamSettings
-	err = json.Unmarshal(fileData, &settings)
+	err = json.Unmarshal(fileData, &s)
 	if err != nil {
 		log.Panicln(err)
 	}
+	return
 }
