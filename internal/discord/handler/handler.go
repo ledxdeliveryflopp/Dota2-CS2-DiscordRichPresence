@@ -9,13 +9,13 @@ import (
 	"github.com/hugolgst/rich-go/client"
 )
 
-func SetDotaPresence(success chan bool, error chan error, response *dotaTypes.GameDotaResponse) {
+func SetDotaPresence(success chan bool, error chan types.DotaPresenceError, response *dotaTypes.GameDotaResponse) {
 	var presence types.DotaPresence
 	presence.SetDotaPresenceInfo(response)
 	err := client.SetActivity("1342725398261403668", client.Activity{
 		State:      presence.State,
 		Details:    presence.Details,
-		LargeImage: presence.HeroCode,
+		LargeImage: presence.MainImage,
 		LargeText:  presence.HeroReadableName,
 		SmallImage: presence.SmallImage,
 		SmallText:  "Dota 2",
@@ -29,13 +29,15 @@ func SetDotaPresence(success chan bool, error chan error, response *dotaTypes.Ga
 		},
 	})
 	if err != nil {
-		error <- err
+		var dotaPresenceError types.DotaPresenceError
+		dotaPresenceError.SetErrors(&presence, err)
+		error <- dotaPresenceError
 		return
 	}
 	success <- true
 }
 
-func SetCsGoPresence(success chan bool, error chan error, response *csgoTypes.GameCsgoResponse) {
+func SetCsGoPresence(success chan bool, error chan types.CsGoPresenceError, response *csgoTypes.GameCsgoResponse) {
 	var presence types.CsGoPresence
 	var settings config.SteamSettings
 	settings.InitSettings()
@@ -52,7 +54,9 @@ func SetCsGoPresence(success chan bool, error chan error, response *csgoTypes.Ga
 		},
 	})
 	if err != nil {
-		error <- err
+		var csGoPresenceError types.CsGoPresenceError
+		csGoPresenceError.SetErrors(&presence, err)
+		error <- csGoPresenceError
 		return
 	}
 	success <- true
