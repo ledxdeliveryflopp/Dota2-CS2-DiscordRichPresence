@@ -16,7 +16,7 @@ func SetDotaPresence(success chan bool, error chan types.DotaPresenceError, resp
 		State:      presence.State,
 		Details:    presence.Details,
 		LargeImage: presence.MainImage,
-		LargeText:  presence.HeroReadableName,
+		LargeText:  presence.LargeText,
 		SmallImage: presence.SmallImage,
 		SmallText:  "Dota 2",
 		//Party: &client.Party{
@@ -46,9 +46,10 @@ func SetCsGoPresence(success chan bool, error chan types.CsGoPresenceError, resp
 		State:      presence.State,
 		Details:    presence.Details,
 		LargeImage: "main",
-		LargeText:  "CS:GO 2",
-		SmallImage: "team image",
-		SmallText:  "team name",
+		LargeText:  presence.LargeText,
+		//LargeText:  "CS:GO 2",
+		SmallImage: presence.SmallImage,
+		SmallText:  presence.SmallText,
 		Timestamps: &client.Timestamps{
 			Start: &discord.GameTime,
 		},

@@ -57,9 +57,9 @@ This application modifies in no way whatsoever any data from the game, it is com
   "steam_id": "<you steam ID>" // string
 }
 ```
-4. Transfer or copy the "gamestate_integration_cs2-gsi.cfg" file to - <CS:GO folder>\game\core\cfg\
-5. Transfer or copy the "gamestate_integration" folder to - <Dota 2 folder>\dota\cfg\
-3. Launch the app after Discord.
+3. Transfer or copy the "gamestate_integration_cs2-gsi.cfg" file to - <CS:GO folder>\game\core\cfg\
+4. Transfer or copy the "gamestate_integration" folder to - <Dota 2 folder>\dota\cfg\
+5. Launch the app after Discord.
 
 [//]: # (## Know issue)
 
